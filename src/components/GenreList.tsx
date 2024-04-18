@@ -5,9 +5,10 @@ import AsideSkeleton from "./AsideSkeleton";
 
 interface Props {
   onSelectedGenre: (genre: Genre) => void;
+  selectedGenre?: Genre | null;
 }
 
-const GenreList = ({ onSelectedGenre }: Props) => {
+const GenreList = ({ onSelectedGenre, selectedGenre }: Props) => {
   const { data, isLoading, error } = useGenres();
   const skeletons = Array.from({ length: 20 }, (_, i) => i + 1);
 
@@ -25,6 +26,7 @@ const GenreList = ({ onSelectedGenre }: Props) => {
               src={getCroppeedImageUrl(genre.image_background)}
             />
             <Button
+              fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
               onClick={() => onSelectedGenre(genre)}
               fontSize="lg"
               variant="link"
