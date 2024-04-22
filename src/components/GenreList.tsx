@@ -8,7 +8,6 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import getCroppeedImageUrl from "../services/image-url";
-import AsideSkeleton from "./AsideSkeleton";
 
 interface Props {
   onSelectedGenre: (genre: Genre) => void;
@@ -16,8 +15,7 @@ interface Props {
 }
 
 const GenreList = ({ onSelectedGenre, selectedGenre }: Props) => {
-  const { data, isLoading, error } = useGenres();
-  const skeletons = Array.from({ length: 20 }, (_, i) => i + 1);
+  const { data } = useGenres();
 
   return (
     <>
@@ -25,9 +23,6 @@ const GenreList = ({ onSelectedGenre, selectedGenre }: Props) => {
         Genres
       </Heading>
       <List>
-        {error && skeletons.map((skeleton) => <AsideSkeleton key={skeleton} />)}
-        {isLoading &&
-          skeletons.map((skeleton) => <AsideSkeleton key={skeleton} />)}
         {data.map((genre) => (
           <ListItem paddingY="5px" key={genre.id}>
             <HStack>
