@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import theme from '../theme';
 
 const axiosInstance = axios.create({
@@ -10,6 +10,7 @@ const axiosInstance = axios.create({
 export interface FetchResponse<T> {
     count: number;
     results: T[];
+    next: string | null
 }
 
 class APIClient<T> {
@@ -22,8 +23,8 @@ class APIClient<T> {
         return axiosInstance.get<FetchResponse<T>>(this.endpoint, params).then(res => res.data);
     }
 
-    getAll = () => {
-        return axiosInstance.get<FetchResponse<T>>(this.endpoint).then(res => res.data);
+    getAll = (config: AxiosRequestConfig) => {
+        return axiosInstance.get<FetchResponse<T>>(this.endpoint, config).then(res => res.data);
     }
 
     post = (data: T) => {
