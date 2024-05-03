@@ -7,7 +7,7 @@ const usePlatforms = () => useQuery({
     queryKey: CACHE_KEY_PLATFORMS,
     queryFn: platformService.get,
     staleTime: 1000 * 60 * 60 * 24,
-    initialData: { count: platforms.length, results: platforms }
+    initialData: platforms
 })
 
 export default usePlatforms

@@ -7,6 +7,6 @@ const useGenres = () => useQuery({
     queryKey: CACHE_KEY_GENRES,
     queryFn: genresService.get,
     staleTime: 1000 * 60 * 60 * 24,
-    initialData: { count: genres.length, results: genres },
+    initialData: genres,
 })
 export default useGenres
