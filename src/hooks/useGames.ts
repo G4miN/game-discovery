@@ -15,8 +15,8 @@ const useGames = (gameQuery: GameQuery, query: PostQuery) =>
         },
         queryFn: ({ pageParam = 1 }) => gamesService.get({
             params: {
-                genres: gameQuery.genre?.id,
-                parent_platforms: gameQuery.platform?.id,
+                genres: gameQuery.genreId,
+                parent_platforms: gameQuery.platformId,
                 ordering: gameQuery.sortOrder,
                 search: gameQuery.searchText,
                 _start: (pageParam - 1) * query.pageSize,
