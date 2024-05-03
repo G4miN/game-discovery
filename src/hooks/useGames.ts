@@ -9,7 +9,7 @@ interface PostQuery {
 const useGames = (gameQuery: GameQuery, query: PostQuery) =>
     useInfiniteQuery<FetchResponse<Game>, Error>({
         queryKey: [CACHE_KEY_GAMES, gameQuery],
-        staleTime: 1 * 60 * 1000,
+        staleTime: 24 * 60 * 60 * 1000,
         getNextPageParam: (lastPage, allPages) => {
             return lastPage.next ? allPages.length + 1 : undefined
         },
