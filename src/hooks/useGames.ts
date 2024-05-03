@@ -1,33 +1,20 @@
-import { useEffect, useState } from "react";
-import apiClient from "../services/api-client";
-import { CanceledError } from "axios";
-import useData from "./useData";
-import { Genre } from "./useGenres";
 import { GameQuery } from '../App';
+import { useQuery } from "@tanstack/react-query";
+import gamesService, { Game } from "../services/gamesService";
+import { CACHE_KEY_GAMES } from "../constans";
+import { FetchResponse } from '../services/api-client';
 
-export interface Platform {
-    id: number;
-    name: string;
-    slug: string;
-}
-export interface Game {
-    id: number;
-    name: string;
-    background_image: string;
-    parent_platforms: { platform: Platform }[];
-    metacritic: number;
-    rating_top: number;
-}
-
-const useGames = (gameQuery: GameQuery) => useData<Game>('/games', {
-    params:
-    {
-        genres: gameQuery.genre?.id,
-        parent_platforms: gameQuery.platform?.id,
-        ordering: gameQuery.sortOrder,
-        search: gameQuery.searchText
-    }
-},
-    [gameQuery]);
+const useGames = (gameQuery: GameQuery) =>
+    useQuery<FetchResponse<Game>, Error>({
+        queryKey: [CACHE_KEY_GAMES, gameQuery],
+        queryFn: () => gamesService.get({
+            params: {
+                genres: gameQuery.genre?.id,
+                parent_platforms: gameQuery.platform?.id,
+                ordering: gameQuery.sortOrder,
+                search: gameQuery.searchText
+            }
+        }),
+    })
 
 export default useGames;
