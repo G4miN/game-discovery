@@ -9,7 +9,7 @@ const HomePage = () => {
   return (
     <Grid
       templateAreas={{
-        base: ` "main"`,
+        base: `"main"`,
         lg: `"aside main"`,
       }}
       templateColumns={{
