@@ -13,7 +13,7 @@ const ExpandableText = ({ children }: Props) => {
   if (children.length <= limit) return <Text>{children}</Text>;
 
   const shortedText = !expand
-    ? children?.toString().slice(0, 100) + "..."
+    ? children?.toString().slice(0, 100) + " ..."
     : children;
 
   return (

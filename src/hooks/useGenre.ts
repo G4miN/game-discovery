@@ -6,7 +6,6 @@ const useGenre = (id?: number) => {
         (p) => p.id === id
     );
     return genre;
-
 }
 
 export default useGenre;
