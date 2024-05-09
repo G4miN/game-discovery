@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig } from "axios";
-import theme from '../theme';
 
 const axiosInstance = axios.create({
     baseURL: "https://api.rawg.io/api",
@@ -15,8 +14,10 @@ export interface FetchResponse<T> {
 
 class APIClient<T> {
     endpoint: string;
-    constructor(endpoint: string) {
+    url?: string;
+    constructor(endpoint: string, url?: string) {
         this.endpoint = endpoint
+        this.url = url
     }
 
     get = (params = {}) => {
@@ -33,6 +34,10 @@ class APIClient<T> {
 
     getBy = (id: number | string) => {
         return axiosInstance.get<T>(`${this.endpoint}/${id}`).then(res => res.data);
+    }
+
+    getAllBy = (id: number | string) => {
+        return axiosInstance.get<FetchResponse<T>>(`${this.endpoint}/${id}${this?.url}`).then(res => res.data)
     }
 }
 
