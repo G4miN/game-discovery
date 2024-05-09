@@ -3,7 +3,8 @@ import ms from "ms";
 import { CACHE_KEY_GAMES } from "../constans";
 import useGameQueryStore from "../gameQuery/store";
 import { FetchResponse } from '../services/api-client';
-import gamesService, { Game } from "../services/gamesService";
+import gamesService from "../services/gamesService";
+import Game from "../entities/Game";
 interface PostQuery {
     pageSize: number;
 }

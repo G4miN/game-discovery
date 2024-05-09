@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { CACHE_KEY_GAMES } from "../constans";
-import gamesService, { Game } from "../services/gamesService";
+import gamesService from "../services/gamesService";
+import Game from "../entities/Game";
 
 const useGame = (slug: string) => useQuery<Game, Error>({
     queryKey: [CACHE_KEY_GAMES, slug],
