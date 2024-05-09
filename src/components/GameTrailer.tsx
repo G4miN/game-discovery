@@ -1,7 +1,9 @@
+import { SimpleGrid } from "@chakra-ui/react";
 import useMovie from "../hooks/useMovie";
+import getCroppeedImageUrl from "../services/image-url";
 
 interface Props {
-  slug: string;
+  slug: string | number;
 }
 
 const GameTrailer = ({ slug }: Props) => {
@@ -12,9 +14,16 @@ const GameTrailer = ({ slug }: Props) => {
 
   return (
     <>
-      {movie?.results.map((x, index) => (
-        <video key={index} src={x.data[480]} poster={x.preview} controls />
-      ))}
+      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={2}>
+        {movie?.results.map((x, index) => (
+          <video
+            key={index}
+            src={x.data[480]}
+            poster={getCroppeedImageUrl(x.preview)}
+            controls
+          />
+        ))}
+      </SimpleGrid>
     </>
   );
 };
